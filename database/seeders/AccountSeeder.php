@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Account;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,7 +13,7 @@ class AccountSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->create([
+        Account::factory()->create([
             'numero_conta' => 1235,
             'saldo' => 40,
         ]);

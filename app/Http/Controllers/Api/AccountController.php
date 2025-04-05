@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Enums\AccountErrorMessage;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Schema;
 use App\Http\Requests\StoreAccountRequest;
 
 class AccountController extends Controller
@@ -18,11 +17,7 @@ class AccountController extends Controller
     public function store(StoreAccountRequest $request)
     {
         $validated = $request->validated();
-
-        $account = Account::create([
-            'numero_conta' => $request->input('numero_conta'),
-            'saldo' => $request->input('saldo')
-        ]);
+        $account = Account::create([ ...$validated ]);
 
         return response()->json($account, Response::HTTP_CREATED);
     }
@@ -32,10 +27,9 @@ class AccountController extends Controller
      */
     public function show(string $numero_conta)
     {
-
         $account = Account::where('numero_conta', $numero_conta)->first();
 
-        if ($account->isEmpty()) {
+        if (!$account) {
             return response()->json(
                 ['message' => AccountErrorMessage::NOT_FOUND],
                 Response::HTTP_NOT_FOUND
