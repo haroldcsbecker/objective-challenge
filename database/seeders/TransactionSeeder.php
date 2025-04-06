@@ -16,7 +16,8 @@ class TransactionSeeder extends Seeder
         Transaction::factory()->create([
             'valor' => 1235,
             'taxa' => 40,
-            'forma_pagamento' => 'D'
+            'forma_pagamento' => 'D',
+            'numero_conta' => 1235
         ]);
     }
 }

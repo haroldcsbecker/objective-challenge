@@ -46,7 +46,7 @@ class TransactionController extends Controller
         // Ensures the accuracy of the saldo returned
         $response = [ 
             'numero_conta' => $account->numero_conta,
-            'saldo' => number_format($newBalance, 2)
+            'saldo' => number_format($account->saldo, 2)
         ];
 
         return response()->json($response, Response::HTTP_CREATED);
