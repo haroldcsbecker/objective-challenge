@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Enums\AccountErrorMessage;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ShowAccountRequest;
 use App\Http\Requests\StoreAccountRequest;
 
 class AccountController extends Controller
@@ -25,9 +26,10 @@ class AccountController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $numero_conta)
-    {
-        $account = Account::where('numero_conta', $numero_conta)->first();
+    public function show(ShowAccountRequest $request)
+    {   
+        $validated = $request->validated();
+        $account = Account::where('numero_conta', $validated['numero_conta'])->first();
 
         if (!$account) {
             return response()->json(

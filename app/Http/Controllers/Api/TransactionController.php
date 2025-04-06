@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Services\PaymentFactory;
 use App\Http\Controllers\Controller;
+use App\Enums\TransactionErrorMessage;
 use App\Http\Requests\StoreTransactionRequest;
 
 class TransactionController extends Controller
@@ -24,10 +25,12 @@ class TransactionController extends Controller
         $paymentFee = $strategy->calculateFee($validated['valor']);
         $totalTransaction = $validated['valor'] + $paymentFee;
 
-        $dontHaveMoney = $account->saldo < $totalTransaction;
-        if ($dontHaveMoney) {
-            // Verificar o response correto
-            return response()->json([], Response::HTTP_CREATED);
+        $insufficientBalance = $account->saldo < $totalTransaction;
+        if ($insufficientBalance) {
+            return response()->json(
+                ['message' => TransactionErrorMessage::INSUFFICIENT_BALANCE], 
+                Response::HTTP_NOT_FOUND
+            );
         }
 
         $transaction = Transaction::create([
@@ -42,7 +45,7 @@ class TransactionController extends Controller
 
         // Ensures the accuracy of the saldo returned
         $response = [ 
-            $account->numero_conta,
+            'numero_conta' => $account->numero_conta,
             'saldo' => number_format($newBalance, 2)
         ];
 
