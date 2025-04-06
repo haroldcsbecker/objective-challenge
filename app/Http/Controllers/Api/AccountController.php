@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Account;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Services\AccountService;
 use App\Enums\AccountErrorMessage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ShowAccountRequest;
@@ -15,10 +15,10 @@ class AccountController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreAccountRequest $request)
+    public function store(StoreAccountRequest $request, AccountService $accountService)
     {
         $validated = $request->validated();
-        $account = Account::create([ ...$validated ]);
+        $account = $accountService->create($validated);
 
         return response()->json($account, Response::HTTP_CREATED);
     }
@@ -26,10 +26,10 @@ class AccountController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ShowAccountRequest $request)
+    public function show(ShowAccountRequest $request, AccountService $accountService)
     {   
         $validated = $request->validated();
-        $account = Account::where('numero_conta', $validated['numero_conta'])->first();
+        $account = $accountService->getAccountByNumber($validated['numero_conta']);
 
         if (!$account) {
             return response()->json(

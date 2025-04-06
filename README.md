@@ -2,6 +2,9 @@
 
 ## Sobre o projeto
 
+O projeto está com overengineering no cálculo de taxas para **apresentação** de conhecimento sobre conceitos e padrões.<br>
+Uma solução realista para este projeto seria apenas salvar as taxas em uma tabela e buscar ela para calcular o valor da transação.
+
 - Data de entrega combinada: 07/04/2025 <br>
 - [**Padrão de commits usados**](https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13)    
 - [**Link do desafio**](docs/Desafio_Tecnico_OBJ.pdf) 
@@ -21,7 +24,6 @@ Para rodar o código localmente na máquina execute os comandos:
 > composer install <br>
 > php artisan migrate <br>
 > composer run dev <br>
-<!-- > php artisan config:clear <br> -->
 
 ## Executar rotas pelo postman:
 Para obter as rotas, baixe o arquivo de importação do [postman](/docs/Objective-challenge.postman_collection.json)
