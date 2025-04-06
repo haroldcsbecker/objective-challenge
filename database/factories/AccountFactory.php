@@ -17,8 +17,8 @@ class AccountFactory extends Factory
     public function definition(): array
     {
         return [
-            'numero_conta' =>fake()->unique()->number(),
-            'saldo' => Str::random(100),
+            'numero_conta' => 1,
+            'saldo' => 100,
         ];
     }
 }

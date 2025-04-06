@@ -14,7 +14,7 @@ class AccountSeeder extends Seeder
     public function run(): void
     {
         Account::factory()->create([
-            'numero_conta' => 1235,
+            'numero_conta' => "1235",
             'saldo' => 40,
         ]);
     }
