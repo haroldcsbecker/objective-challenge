@@ -22,7 +22,7 @@ class AccountService
     }
 
     // Ensures the accuracy of the saldo returned
-    public function formatAccountResponse(Account $account,): array {
+    public function formatAccountResponse(Account $account): array {
         return [ 
             'numero_conta' => $account->numero_conta,
             'saldo' => number_format($account->saldo, 2)

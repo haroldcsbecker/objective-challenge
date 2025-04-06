@@ -8,6 +8,6 @@ use App\Contracts\PaymentInterface;
 class CreditStrategy implements PaymentInterface
 {
     public function calculateFee(float $value): float {
-		return $value * (FeePercentage::CREDIT->value / 100);
+		    return $value * (FeePercentage::CREDIT->value / 100);
     }
 }
